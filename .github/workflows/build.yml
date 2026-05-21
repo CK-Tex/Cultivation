@@ -18,38 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-win:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-
-      - name: Install deps and build
-        run: yarn && yarn build --debug
-
-      - name: Compress build
-        uses: vimtor/action-zip@v1
-        with:
-          files: src-tauri/target/debug/lang/ src-tauri/target/debug/keys/ src-tauri/target/debug/patch/ src-tauri/target/debug/Cultivation.exe src-tauri/target/debug/bundle/msi/
-          recursive: true
-          dest: Cultivation.zip
-
-      - name: Upload build
-        uses: actions/upload-artifact@v4
-        with:
-          name: CultivationWin
-          path: Cultivation.zip
-
   build-ubuntu:
     runs-on: ubuntu-20.04
     steps:

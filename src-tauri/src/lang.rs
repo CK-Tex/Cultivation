@@ -1,5 +1,6 @@
 use crate::system_helpers::*;
 use std::path::{Path, PathBuf};
+use tauri::Manager;
 
 fn resolve_lang_path(window: &tauri::Window, lang: &str) -> Option<PathBuf> {
     let file = format!("lang/{}.json", lang);
